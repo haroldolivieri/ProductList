@@ -37,10 +37,12 @@ class ProductListActivity(override val layout: Int = R.layout.activity_product_l
     }
 
     override fun showError(message: String?) {
+        swipe.isRefreshing = false
         showSnackBar(productList, message ?: "Unknown error")
     }
 
     override fun showList(products: List<Product>) {
+        swipe.isRefreshing = false
         productAdapter.setProducts(products)
     }
 
@@ -61,5 +63,9 @@ class ProductListActivity(override val layout: Int = R.layout.activity_product_l
         productList.layoutManager = linearLayoutManager
         productList.adapter = productAdapter
         productList.setEmptyView(emptyView)
+
+        swipe.setOnRefreshListener {
+            presenter.refreshProducts()
+        }
     }
 }

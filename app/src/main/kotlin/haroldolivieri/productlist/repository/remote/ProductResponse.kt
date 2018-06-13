@@ -13,9 +13,10 @@ data class ProductResponse(@SerializedName("identifier")
                            override val currentPrice: Float = 0F,
                            override val currency: String = "",
                            @SerializedName("image")
-                           private val imageResponse: ImageResponse? = null) : Product {
+                           val imageResponse: ImageResponse? = null) : Product {
 
-    override val imageUrl: String = imageResponse?.url ?: ""
+    override val imageUrl: String
+        get() = imageResponse?.url ?: ""
 }
 
 data class ImageResponse(val id: Int, val url: String)

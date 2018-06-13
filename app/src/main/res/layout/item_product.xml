@@ -14,7 +14,7 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             tools:background="@android:color/black"
             tools:src="@drawable/ic_launcher_foreground" />
 
@@ -34,6 +34,7 @@
                     fontPath="@string/font_montserrat_semi_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     tools:ignore="MissingPrefix"
@@ -44,14 +45,16 @@
                     fontPath="@string/font_montserrat_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:layout_marginBottom="10dp"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="bottom"
+                    android:singleLine="true"
                     tools:ignore="MissingPrefix"
                     tools:text="Ferrari" />
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_marginStart="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -59,16 +62,16 @@
 
                 <TextView
                     android:id="@+id/currentPrice"
-                    android:textSize="24sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="24sp"
                     tools:text="50000 USD" />
 
                 <TextView
                     android:id="@+id/originalPrice"
-                    android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     tools:text="1000000 USD" />
             </LinearLayout>
         </LinearLayout>

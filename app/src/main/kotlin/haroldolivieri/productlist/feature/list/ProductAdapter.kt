@@ -13,6 +13,9 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions
 import haroldolivieri.productlist.R
 import haroldolivieri.productlist.domain.Product
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 class ProductAdapter(private var adapterList: List<Product>? = null,
@@ -58,17 +61,21 @@ class ProductAdapter(private var adapterList: List<Product>? = null,
                     .apply(options)
                     .into(image)
 
+            val numberFormat = NumberFormat
+                    .getNumberInstance(Locale.ENGLISH) as DecimalFormat
+            numberFormat.applyPattern("#.##")
+
             product.apply {
                 productName.text = name
                 productBrand.text = brand
 
-                productCurrentPrice.text = "$currentPrice - $currency"
+                productCurrentPrice.text = "$${numberFormat.format(currentPrice)} - $currency"
 
                 if(currentPrice == originalPrice) {
                     productOriginalPrice.visibility = View.INVISIBLE
                 } else {
                     productOriginalPrice.visibility = View.VISIBLE
-                    productOriginalPrice.text = "$originalPrice - $currency"
+                    productOriginalPrice.text = "$${numberFormat.format(originalPrice)} - $currency"
                 }
 
                 itemView.setOnClickListener { onClickItem }

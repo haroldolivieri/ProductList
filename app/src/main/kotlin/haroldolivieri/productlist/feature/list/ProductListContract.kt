@@ -5,7 +5,7 @@ import haroldolivieri.productlist.domain.Product
 
 object ProductListContract {
     interface View {
-        fun showList(it: List<Product>)
+        fun showList(products: List<Product>)
         fun showError(message: String?)
     }
 
