@@ -1,17 +1,32 @@
 package haroldolivieri.productlist.feature.list
 
+import haroldolivieri.productlist.repository.ProductRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class ProductListPresenter : ProductListContract.Presenter {
+
+class ProductListPresenter @Inject constructor(val view: ProductListContract.View,
+                                               val repository: ProductRepository) :
+        ProductListContract.Presenter {
+
+    private val disposables: CompositeDisposable = CompositeDisposable()
+
     override fun onCreate() {
-        TODO("not implemented")
+        refreshProducts()
     }
 
     override fun onDestroy() {
-        TODO("not implemented")
+        disposables.dispose()
     }
 
     override fun refreshProducts() {
-        TODO("not implemented")
+        disposables.add(repository.fetchProductList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ view.showList(it)},
+                        { t -> view.showError(t.message)}))
     }
 }
 

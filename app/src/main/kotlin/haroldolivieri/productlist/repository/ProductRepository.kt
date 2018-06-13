@@ -6,6 +6,5 @@ import io.reactivex.Single
 
 
 interface ProductRepository {
-    fun saveProductList(products: List<Product>)
     fun fetchProductList(): Single<List<Product>>
 }

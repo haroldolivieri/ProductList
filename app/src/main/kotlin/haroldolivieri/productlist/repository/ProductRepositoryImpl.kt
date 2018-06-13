@@ -9,17 +9,13 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/**
+ * The repository pattern is a good choice when we need to retrieve data from
+ * different source but we might keep that behind the scenes for the presenter layer
+ */
 class ProductRepositoryImpl
 @Inject constructor(private val productDAO: ProductDAO,
                     private val productService: ProductService) : ProductRepository {
-
-    override fun saveProductList(products: List<Product>) {
-        productDAO.nukeTable()
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    productDAO.insertMany(products.map { it.toProductEntity() }).subscribe()
-                }, {})
-    }
 
     override fun fetchProductList(): Single<List<Product>> {
         return remoteStream().onErrorResumeNext { localStream() }
@@ -27,7 +23,7 @@ class ProductRepositoryImpl
 
     private fun remoteStream(): Single<List<Product>> = productService.fetchProducts()
             .toObservable()
-            .flatMap { Observable.fromArray(it.map { it as Product }) }
+            .flatMap { Observable.fromArray(it.filter { it != null }.map { it as Product }) }
             .flatMap {
                 saveProductList(it)
                 Observable.fromIterable(it)
@@ -40,4 +36,15 @@ class ProductRepositoryImpl
             .flatMap { Observable.fromArray(it.map { it as Product }) }
             .flatMap { Observable.fromIterable(it) }
             .toList()
+
+    private fun saveProductList(products: List<Product>) {
+        productDAO.nukeTableCompletable()
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    productDAO
+                            .insertManyCompletable(products.map { it.toProductEntity() })
+                            .subscribe()
+                }, {})
+    }
+
 }

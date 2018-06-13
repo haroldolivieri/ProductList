@@ -1,9 +1,11 @@
 package haroldolivieri.productlist
 
+import android.arch.persistence.room.Room
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import haroldolivieri.productlist.di.ApplicationComponent
 import haroldolivieri.productlist.di.DaggerApplicationComponent
+import haroldolivieri.productlist.repository.local.ProductDatabase
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 

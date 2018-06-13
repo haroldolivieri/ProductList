@@ -7,19 +7,26 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao
-interface ProductDAO {
+abstract class ProductDAO {
 
     companion object {
         private const val TABLE_NAME = "productEntity"
     }
 
-    @Query("SELECT * FROM $TABLE_NAME" +
-            "ORDER BY name ASC")
-    fun fetchProducts(): Single<List<ProductEntity>>
+    @Query("SELECT * FROM $TABLE_NAME ORDER BY name ASC")
+    abstract fun fetchProducts(): Single<List<ProductEntity>>
 
     @Insert
-    fun insertMany(product: List<ProductEntity>): Completable
+    abstract fun insertMany(product: List<ProductEntity>)
 
     @Query("DELETE FROM $TABLE_NAME")
-    fun nukeTable(): Completable
+    abstract fun nukeTable()
+
+    open fun insertManyCompletable(products: List<ProductEntity>): Completable {
+        return Completable.fromAction { insertMany(products) }
+    }
+
+    open fun nukeTableCompletable(): Completable {
+        return Completable.fromAction { nukeTable() }
+    }
 }

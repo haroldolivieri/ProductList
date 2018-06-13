@@ -31,6 +31,7 @@ class RemoteModule {
         val gsonBuilder = GsonBuilder()
 
         val gson = gsonBuilder
+                .setLenient()
                 .registerTypeAdapterFactory(ProductsTypeAdapterFactory())
                 .create()
 

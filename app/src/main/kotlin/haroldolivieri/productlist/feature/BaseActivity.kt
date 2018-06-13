@@ -42,6 +42,10 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     }
 
     internal fun showSnackBar(view: View, message: Int, duration: Int = Snackbar.LENGTH_LONG) {
+        showSnackBar(view, getString(message), duration)
+    }
+
+    internal fun showSnackBar(view: View, message: String, duration: Int = Snackbar.LENGTH_LONG) {
         if (snackBar != null && snackBar!!.isShown) {
             return
         }

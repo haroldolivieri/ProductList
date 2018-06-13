@@ -1,9 +1,12 @@
 package haroldolivieri.productlist.feature.list
 
+import haroldolivieri.productlist.domain.Product
+
 
 object ProductListContract {
     interface View {
-        fun showList()
+        fun showList(it: List<Product>)
+        fun showError(message: String?)
     }
 
     interface Presenter {

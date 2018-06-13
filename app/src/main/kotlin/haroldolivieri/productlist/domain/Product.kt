@@ -1,7 +1,10 @@
 package haroldolivieri.productlist.domain
 
-import haroldolivieri.productlist.repository.local.ProductEntity
 
+/**
+ * This interface ensure that in different sources of data I will always follow the
+ * same protocol defined here (ProductEntity and ProductResponse implements this interface)
+ */
 interface Product {
     val id: Int
     val name: String
