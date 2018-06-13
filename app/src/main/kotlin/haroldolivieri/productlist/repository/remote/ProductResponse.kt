@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 import haroldolivieri.productlist.domain.Product
 
 data class ProductResponse(@SerializedName("identifier")
-                           override val id: Int,
-                           override val name: String,
-                           override val brand: String,
+                           override val id: Int = 0,
+                           override val name: String = "",
+                           override val brand: String = "",
                            @SerializedName("original_price")
-                           override val originalPrice: Float,
+                           override val originalPrice: Float = 0F,
                            @SerializedName("current_price")
-                           override val currentPrice: Float,
-                           override val currency: String,
+                           override val currentPrice: Float = 0F,
+                           override val currency: String = "",
                            @SerializedName("image")
-                           private val imageResponse: ImageResponse) : Product {
+                           private val imageResponse: ImageResponse? = null) : Product {
 
-    override val imageUrl: String = imageResponse.url
+    override val imageUrl: String = imageResponse?.url ?: ""
 }
 
 data class ImageResponse(val id: Int, val url: String)

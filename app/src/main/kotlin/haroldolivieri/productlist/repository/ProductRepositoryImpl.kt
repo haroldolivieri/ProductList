@@ -38,8 +38,6 @@ class ProductRepositoryImpl
     private fun localStream(): Single<List<Product>> = productDAO.fetchProducts()
             .toObservable()
             .flatMap { Observable.fromArray(it.map { it as Product }) }
-            .flatMap {
-                saveProductList(it)
-                Observable.fromIterable(it)
-            }.toList()
+            .flatMap { Observable.fromIterable(it) }
+            .toList()
 }
