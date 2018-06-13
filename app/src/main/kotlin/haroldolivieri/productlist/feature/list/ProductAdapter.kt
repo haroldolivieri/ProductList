@@ -78,7 +78,7 @@ class ProductAdapter(private var adapterList: List<Product>? = null,
                     productOriginalPrice.text = "$${numberFormat.format(originalPrice)} - $currency"
                 }
 
-                itemView.setOnClickListener { onClickItem }
+                itemView.setOnClickListener { onClickItem.invoke(this) }
             }
         }
     }

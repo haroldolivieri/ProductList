@@ -1,5 +1,6 @@
 package haroldolivieri.productlist.feature.list
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
@@ -9,6 +10,7 @@ import android.util.Log
 import haroldolivieri.productlist.R
 import haroldolivieri.productlist.domain.Product
 import haroldolivieri.productlist.feature.BaseActivity
+import kotlinx.android.synthetic.main.activity_product_list.*
 import kotlinx.android.synthetic.main.list_content.*
 import javax.inject.Inject
 
@@ -34,6 +36,11 @@ class ProductListActivity(override val layout: Int = R.layout.activity_product_l
 
         presenter.onCreate()
         setupRecyclerView()
+
+        collapsingToolbar.title = getString(R.string.app_name)
+        val tf = Typeface.createFromAsset(assets, getString(R.string.font_montserrat_semi_bold))
+        collapsingToolbar.setCollapsedTitleTypeface(tf)
+        collapsingToolbar.setExpandedTitleTypeface(tf)
     }
 
     override fun showError(message: String?) {

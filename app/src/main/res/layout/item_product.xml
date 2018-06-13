@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_margin="8dp">
 
     <LinearLayout
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:scaleType="centerCrop"
-            tools:background="@android:color/black"
+            android:background="@color/colorGray"
             tools:src="@drawable/ic_launcher_foreground" />
 
         <LinearLayout
