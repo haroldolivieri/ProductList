@@ -1,7 +1,6 @@
 package haroldolivieri.productlist.repository.local
 
 import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -11,7 +10,11 @@ import dagger.Provides
 class LocalModule {
 
     @Provides
-    fun provideDatabase(context : Context) : RoomDatabase =
-        Room.databaseBuilder(context, ProductDatabase::class.java, "we-need-db").build()
+    fun provideDatabase(context : Context) : ProductDatabase =
+        Room.databaseBuilder(context, ProductDatabase::class.java, "ProductList_DB").build()
+
+    @Provides
+    fun provideProductDAO(roomDatabase: ProductDatabase) : ProductDAO =
+            roomDatabase.productDao()
 
 }

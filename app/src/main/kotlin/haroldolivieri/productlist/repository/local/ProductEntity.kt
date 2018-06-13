@@ -12,3 +12,6 @@ class ProductEntity(@PrimaryKey override val id: Int,
                     override val currentPrice: Float,
                     override val currency: String,
                     override val imageUrl: String) : Product
+
+fun Product.toProductEntity() : ProductEntity =
+        ProductEntity(id, name, brand, originalPrice, currentPrice, currency, imageUrl)

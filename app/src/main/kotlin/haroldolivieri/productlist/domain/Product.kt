@@ -1,6 +1,6 @@
 package haroldolivieri.productlist.domain
 
-import org.joda.money.CurrencyUnit
+import haroldolivieri.productlist.repository.local.ProductEntity
 
 interface Product {
     val id: Int
