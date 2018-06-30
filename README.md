@@ -36,6 +36,3 @@ again.✅
 ● Pull to refresh feature that reloads contents of the list from the web service✅
 
 ● Write a UI Test❌  
-
-I'll be happy to explain all my architecture choices and receive feedback about my code.
-Hope to hear from you soon!
